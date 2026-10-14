@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gugi Creamery - Menu</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;0,800;1,600&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        choc: '#5a2a1a',
+                        choclight: '#723824',
+                        cream: '#fff6e9',
+                        creamdark: '#fcebd2',
+                        pinkaccent: '#e8447a',
+                        pinklight: '#fdf0f4',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Poppins"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #fff6e9;
+            color: #5a2a1a;
+            font-family: 'Poppins', sans-serif;
+        }
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="pb-24">
+
+    <!-- Sticky Header -->
+    <header class="sticky top-0 z-50 bg-[#5a2a1a] text-[#fff6e9] shadow-lg border-b-2 border-[#e8447a]">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-11 h-11 rounded-full bg-[#fff6e9] flex items-center justify-center p-1 border-2 border-[#e8447a]">
+                    <svg viewBox="0 0 100 100" class="w-full h-full">
+                        <circle cx="50" cy="50" r="45" fill="#fcebd2" />
+                        <circle cx="50" cy="30" r="16" fill="#f9cb9c" />
+                        <path d="M 34 30 Q 50 10 66 30 Z" fill="#e8447a" />
+                        <circle cx="50" cy="12" r="5" fill="#ffffff" />
+                        <circle cx="44" cy="28" r="2" fill="#5a2a1a" />
+                        <circle cx="56" cy="28" r="2" fill="#5a2a1a" />
+                        <path d="M 44 34 Q 50 38 56 34" stroke="#5a2a1a" stroke-width="2" fill="none" />
+                        <path d="M 32 60 Q 50 42 68 60 L 65 82 Q 50 86 35 82 Z" fill="#5a2a1a" />
+                        <path d="M 40 50 L 50 65 L 60 50" stroke="#fff6e9" stroke-width="2" fill="none" />
+                    </svg>
+                </div>
+                <div>
+                    <h1 class="font-serif text-xl sm:text-2xl font-bold leading-tight tracking-wide text-white">Gugi Creamery</h1>
+                    <p class="text-[10px] sm:text-xs text-[#e8447a] font-medium tracking-wider">BAKED WITH LOVE, JUST FOR YOU!</p>
+                </div>
+            </div>
+
+            <!-- Cart Trigger Button -->
+            <button onclick="toggleCartModal()" class="relative bg-[#e8447a] hover:bg-pink-600 text-white p-2.5 rounded-full shadow-md transition flex items-center justify-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                </svg>
+                <span id="cartBadge" class="absolute -top-1 -right-1 bg-white text-[#5a2a1a] text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-[#e8447a] hidden">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Banner -->
+    <section class="bg-gradient-to-b from-[#5a2a1a] to-[#723824] text-white py-6 px-4 text-center">
+        <div class="max-w-2xl mx-auto">
+            <span class="inline-block bg-[#e8447a] text-white text-xs px-3 py-1 rounded-full font-semibold mb-2 shadow-sm">Home Bakery • Tamil Nadu</span>
+            <h2 class="font-serif text-2xl sm:text-3xl font-bold mb-1">Sweet Treats • Happy Hearts</h2>
+            <p class="text-xs sm:text-sm text-[#fcebd2] opacity-90">Freshly baked handcrafted brownies, bombolonis, cookies, and specialty cakes.</p>
+            
+            <!-- Search Input -->
+            <div class="mt-4 relative max-w-md mx-auto">
+                <input type="text" id="searchInput" oninput="filterMenu()" placeholder="Search brownies, cookies, bombolonis..." class="w-full py-2.5 px-4 pl-10 rounded-full text-sm text-[#5a2a1a] bg-[#fff6e9] focus:outline-none focus:ring-2 focus:ring-[#e8447a] shadow-inner">
+                <svg class="w-4 h-4 absolute left-3.5 top-3 text-[#5a2a1a] opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                </svg>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sticky Navigation Tabs -->
+    <nav class="sticky top-[61px] z-40 bg-[#fff6e9] border-b border-[#fcebd2] shadow-sm py-2 px-2">
+        <div class="max-w-4xl mx-auto flex items-center gap-2 overflow-x-auto hide-scrollbar text-xs sm:text-sm font-medium" id="categoryTabs">
+            <!-- Dynamic Category Pills inserted here -->
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="max-w-4xl mx-auto px-4 py-6 space-y-8" id="menuContainer">
+        <!-- Dynamic Menu Cards loaded from JSON -->
+    </main>
+
+    <!-- Floating Action Button for WhatsApp -->
+    <div class="fixed bottom-4 right-4 z-40 flex flex-col items-end gap-2">
+        <a href="https://wa.me/916383591415?text=Hi%20Gugi%20Creamery,%20I%20would%20like%20to%20place%20an%20order!" target="_blank" class="flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3 px-5 rounded-full shadow-lg hover:shadow-xl transition transform hover:-translate-y-0.5">
+            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+            </svg>
+            <span class="text-xs sm:text-sm">Order on WhatsApp</span>
+        </a>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cartModal" class="fixed inset-0 z-50 bg-black bg-opacity-50 hidden backdrop-blur-sm flex justify-end">
+        <div class="bg-[#fff6e9] w-full max-w-md h-full flex flex-col shadow-2xl">
+            <div class="bg-[#5a2a1a] text-white px-5 py-4 flex justify-between items-center">
+                <h3 class="font-serif text-lg font-bold">Your Order Cart</h3>
+                <button onclick="toggleCartModal()" class="text-gray-300 hover:text-white text-xl">&times;</button>
+            </div>
+            
+            <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-4 space-y-3">
+                <!-- Cart items load here -->
+            </div>
+
+            <div class="p-4 bg-white border-t border-[#fcebd2] space-y-3">
+                <div class="flex justify-between font-bold text-lg text-[#5a2a1a]">
+                    <span>Total Estimate:</span>
+                    <span id="cartTotal">₹0</span>
+                </div>
+                <p class="text-[11px] text-gray-500">* Shipping charges will be calculated upon order confirmation based on location.</p>
+                <button onclick="sendWhatsAppOrder()" class="w-full bg-[#e8447a] hover:bg-pink-600 text-white font-bold py-3 rounded-xl shadow transition">
+                    Proceed to WhatsApp Order
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#5a2a1a] text-[#fff6e9] mt-12 py-8 px-4 text-center border-t-4 border-[#e8447a]">
+        <div class="max-w-2xl mx-auto space-y-4">
+            <div class="flex justify-center items-center gap-2">
+                <h3 class="font-serif text-xl font-bold">Gugi Creamery</h3>
+            </div>
+            <p class="text-xs text-[#fcebd2] max-w-md mx-auto">Freshly Baked • Premium Ingredients • DM to Order • Home Delivery Available</p>
+            
+            <!-- Social Links -->
+            <div class="flex justify-center gap-6 pt-2 text-xs font-medium">
+                <a href="https://instagram.com/gugi_creamery" target="_blank" class="flex items-center gap-1.5 hover:text-[#e8447a] transition">
+                    <span>Instagram</span> <span class="text-[#e8447a]">@gugi_creamery</span>
+                </a>
+                <a href="https://youtube.com/@gugicreamery" target="_blank" class="flex items-center gap-1.5 hover:text-[#e8447a] transition">
+                    <span>YouTube</span> <span class="text-[#e8447a]">@gugicreamery</span>
+                </a>
+            </div>
+
+            <p class="text-[10px] opacity-60 pt-4">© Gugi Creamery. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data & Logic -->
+    <script>
+        // Full digitized menu data extracted from the source image
+        const menuData = [
+            {
+                id: "muttai_mittai",
+                title: "Muttai Mittai",
+                svgType: "muttai",
+                items: [
+                    { name: "250g", price: 245, note: "+ shipping" },
+                    { name: "500g", price: 430, note: "+ shipping" }
+                ],
+                notes: "Shipping Info: 250g - Based on location | 500g - ₹25 | 1/2 kg - ₹20 shipping"
+            },
+            {
+                id: "brownies",
+                title: "Brownies (1/2 KG)",
+                svgType: "brownie",
+                items: [
+                    { name: "Classic", price: 485 },
+                    { name: "Biscoff", price: 580 },
+                    { name: "Double Chocolate", price: 540 },
+                    { name: "Red Velvet", price: 500 },
+                    { name: "Triple Chocolate", price: 560 },
+                    { name: "Ragi (Plain)", price: 499 },
+                    { name: "Lava", price: 620 },
+                    { name: "Wheat (Plain)", price: 499 },
+                    { name: "Brookies", price: 560 },
+                    { name: "Thinal Brownie (Plain)", price: 499 },
+                    { name: "Nutella", price: 575 },
+                    { name: "Caramel Cornflakes", price: 540 },
+                    { name: "Crunchy Brownie Nutella (500g)", price: 550, isNew: true },
+                    { name: "Biscoff (500g)", price: 599, isNew: true },
+                    { name: "Pistachios (500g)", price: 630, isNew: true }
+                ]
+            },
+            {
+                id: "blondies",
+                title: "Blondies (1/2 KG)",
+                svgType: "blondie",
+                items: [
+                    { name: "Classic", price: 500 },
+                    { name: "Triple Chocolate", price: 565 },
+                    { name: "Double Chocolate", price: 545 },
+                    { name: "Kinder", price: 699 },
+                    { name: "Brookies", price: 579 },
+                    { name: "Caramel (No Cornflakes)", price: 560 }
+                ],
+                notes: "400g blondies also available – DM for price details"
+            },
+            {
+                id: "assorted_brownies",
+                title: "Assorted Brownie Boxes",
+                svgType: "brownie",
+                items: [
+                    { name: "9 pcs (550g)", price: 579 },
+                    { name: "350g Box", price: 379 }
+                ]
+            },
+            {
+                id: "bombolonis",
+                title: "Bombolonis",
+                svgType: "bomboloni",
+                items: [
+                    { name: "Nutella Bomboloni (4 pcs)", price: 299, note: "+ shipping" },
+                    { name: "Biscoff Bomboloni (4 pcs)", price: 340, note: "+ shipping" },
+                    { name: "Milk Chocolate - Compound (4 pcs)", price: 270, note: "+ shipping" },
+                    { name: "Real Milk Chocolate (4 pcs)", price: 340, note: "+ shipping" },
+                    { name: "Vanilla Custard (4 pcs)", price: 230, note: "+ shipping" },
+                    { name: "Caramel (4 pcs)", price: 280, note: "+ shipping" },
+                    { name: "Strawberry (4 pcs)", price: 280, note: "+ shipping" },
+                    { name: "Tiramisu Bomboloni (4 pcs)", price: 220, note: "+ shipping" },
+                    { name: "Mango Bomboloni (4 pcs)", price: 450, note: "+ shipping" },
+                    { name: "Assorted Bomboloni (5 pcs)", price: 370, note: "+ shipping" },
+                    { name: "Mini Bomboloni - Any Flavour (10 pcs)", price: 399, note: "+ shipping" },
+                    { name: "Blueberry Bomboloni (4 pcs)", price: 420, note: "+ shipping" }
+                ],
+                notes: "Flavours include: Nutella, Biscoff, Caramel, Strawberry, Milk Chocolate"
+            },
+            {
+                id: "cookies",
+                title: "Cookies (250g)",
+                svgType: "cookie",
+                items: [
+                    { name: "Ragi Cookies", price: 230 },
+                    { name: "Brown Butter Cookies", price: 265 },
+                    { name: "Wheat Cookies", price: 265 },
+                    { name: "Cookie Bar", price: 275 },
+                    { name: "Baby Cookies", price: 255 },
+                    { name: "Coconut Cookies", price: 260 },
+                    { name: "Choco Chip Cookies", price: 235 },
+                    { name: "Mini Choco Chip Cookies", price: 250 },
+                    { name: "Millet Cookies (Wheat + Ragi)", price: 235 },
+                    { name: "Toefthing Biscuits (Approx 150g)", price: 160 }
+                ],
+                notes: "Millet Cookie Flavours available: Ragi, Thinai, Karuppu Kavuni, Kambu"
+            },
+            {
+                id: "tea_cakes",
+                title: "Tea Cakes (250g)",
+                svgType: "cake",
+                items: [
+                    { name: "Vanilla", price: 125 },
+                    { name: "Mocha Coffee", price: 150 },
+                    { name: "Rose Milk", price: 155 },
+                    { name: "Pineapple", price: 140 },
+                    { name: "Tutti Frutti", price: 135 },
+                    { name: "Pista", price: 150 },
+                    { name: "Chocolate", price: 135 },
+                    { name: "Rasamalai", price: 160 }
+                ]
+            },
+            {
+                id: "butter_cake",
+                title: "Butter Cake (Egg & Eggless)",
+                svgType: "cake",
+                items: [
+                    { name: "Eggless 250g", price: 300, note: "+ shipping" },
+                    { name: "Eggless 500g", price: 580, note: "+ ₹20 shipping" },
+                    { name: "With Egg 250g", price: 280, note: "+ shipping" },
+                    { name: "With Egg 500g", price: 570, note: "+ ₹20 shipping" }
+                ]
+            },
+            {
+                id: "cookie_tin",
+                title: "Cookie Tin (500g & 250g)",
+                svgType: "tin",
+                items: [
+                    { name: "Nutella Chocolate Couverture 500g", price: 650, isNew: true },
+                    { name: "Nutella 500g", price: 580 },
+                    { name: "Biscoff 500g", price: 680 },
+                    { name: "Assorted 500g", price: 599 },
+                    { name: "Nutella with Ferrero 500g", price: 699 },
+                    { name: "Pistachio Kunafa 500g", price: 740 },
+                    { name: "Nutella with Milk Chocolate 500g", price: 699 },
+                    { name: "Red Velvet with White Chocolate 500g", price: 630 },
+                    { name: "Milk Chocolate Couverture 250g", price: 390 },
+                    { name: "Nutella 250g", price: 375 },
+                    { name: "Biscoff 250g", price: 420 },
+                    { name: "Assorted 250g", price: 350 },
+                    { name: "Nutella with Ferrero 250g", price: 450 },
+                    { name: "Nutella with Milk Chocolate 250g", price: 420 },
+                    { name: "Pistachio Kunafa 250g", price: 399, isNew: true }
+                ]
+            },
+            {
+                id: "cookie_pie",
+                title: "Cookie Pie (Per Cup ~ 100-120g)",
+                svgType: "pie",
+                items: [
+                    { name: "Nutella", price: 140, note: "+ shipping" },
+                    { name: "Milk Chocolate", price: 170, note: "+ shipping" },
+                    { name: "Biscoff", price: 175, note: "+ shipping" },
+                    { name: "Nutella with Ferrero", price: 190, note: "+ shipping" },
+                    { name: "Pista", price: 170, note: "+ shipping" }
+                ]
+            },
+            {
+                id: "shipping",
+                title: "Shipping Charges",
+                svgType: "shipping",
+                isShippingCard: true,
+                rates: [
+                    { location: "Chennai", cost: "₹40" },
+                    { location: "Other Districts (Within Tamil Nadu)", cost: "₹60" }
+                ],
+                notes: "Special item shipping: Muttai Mittai (500g: ₹25, 1/2kg: ₹20). Butter Cakes: ₹20 shipping."
+            }
+        ];
+
+        let cart = [];
+
+        // Generate Illustration SVGs
+        function getSVG(type) {
+            switch(type) {
+                case 'brownie':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><rect x="15" y="25" width="70" height="40" rx="6" fill="#5a2a1a"/><path d="M 15 35 Q 35 25 50 35 T 85 35" stroke="#723824" stroke-width="6" fill="none"/><rect x="25" y="20" width="12" height="8" rx="2" fill="#e8447a"/><rect x="55" y="18" width="15" height="10" rx="2" fill="#fcebd2"/></svg>`;
+                case 'blondie':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><rect x="15" y="25" width="70" height="40" rx="6" fill="#fcebd2" stroke="#5a2a1a" stroke-width="2"/><circle cx="35" cy="40" r="4" fill="#5a2a1a"/><circle cx="55" cy="50" r="5" fill="#e8447a"/><circle cx="65" cy="35" r="4" fill="#5a2a1a"/></svg>`;
+                case 'bombolonis':
+                case 'bomboloni':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><circle cx="50" cy="45" r="28" fill="#f9cb9c" stroke="#5a2a1a" stroke-width="2"/><circle cx="50" cy="45" r="12" fill="#e8447a"/><path d="M 30 25 Q 50 20 70 25" stroke="#ffffff" stroke-width="4" stroke-linecap="round" fill="none"/></svg>`;
+                case 'cookie':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><circle cx="50" cy="42" r="28" fill="#e5a968"/><circle cx="38" cy="32" r="3.5" fill="#5a2a1a"/><circle cx="60" cy="35" r="4" fill="#5a2a1a"/><circle cx="45" cy="52" r="3" fill="#5a2a1a"/><circle cx="62" cy="52" r="3.5" fill="#5a2a1a"/></svg>`;
+                case 'cake':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><path d="M 20 55 L 80 55 L 75 30 L 25 30 Z" fill="#fcebd2" stroke="#5a2a1a" stroke-width="2"/><path d="M 25 30 Q 50 20 75 30" fill="#e8447a"/><circle cx="50" cy="22" r="6" fill="#e8447a"/></svg>`;
+                case 'muttai':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><ellipse cx="50" cy="45" rx="22" ry="28" fill="#fff" stroke="#5a2a1a" stroke-width="2"/><path d="M 35 45 Q 50 35 65 45" stroke="#fcebd2" stroke-width="3" fill="none"/></svg>`;
+                case 'tin':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><ellipse cx="50" cy="25" rx="30" ry="10" fill="#e8447a"/><rect x="20" y="25" width="60" height="30" fill="#723824"/><ellipse cx="50" cy="55" rx="30" ry="10" fill="#5a2a1a"/></svg>`;
+                case 'pie':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><path d="M 20 35 L 30 60 L 70 60 L 80 35 Z" fill="#e5a968" stroke="#5a2a1a" stroke-width="2"/><ellipse cx="50" cy="35" rx="30" ry="8" fill="#5a2a1a"/></svg>`;
+                case 'shipping':
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><rect x="15" y="30" width="45" height="25" fill="#5a2a1a" rx="2"/><path d="M 60 38 L 75 38 L 82 48 L 82 55 L 60 55 Z" fill="#e8447a"/><circle cx="30" cy="58" r="6" fill="#333"/><circle cx="70" cy="58" r="6" fill="#333"/></svg>`;
+                default:
+                    return `<svg viewBox="0 0 100 80" class="w-16 h-16"><circle cx="50" cy="40" r="25" fill="#e8447a"/></svg>`;
+            }
+        }
+
+        // Render UI
+        function renderMenu() {
+            const container = document.getElementById('menuContainer');
+            const tabsContainer = document.getElementById('categoryTabs');
+            
+            container.innerHTML = '';
+            tabsContainer.innerHTML = '';
+
+            menuData.forEach((cat, index) => {
+                // Generate Tab
+                const tab = document.createElement('a');
+                tab.href = `#${cat.id}`;
+                tab.className = `px-4 py-1.5 rounded-full whitespace-nowrap transition border ${index === 0 ? 'bg-[#5a2a1a] text-white border-[#5a2a1a]' : 'bg-white text-[#5a2a1a] border-[#fcebd2] hover:bg-[#fcebd2]'}`;
+                tab.innerText = cat.title;
+                tabsContainer.appendChild(tab);
+
+                // Generate Category Card
+                const card = document.createElement('div');
+                card.id = cat.id;
+                card.className = "bg-white rounded-2xl shadow-md border border-[#fcebd2] overflow-hidden scroll-mt-24";
+
+                if (cat.isShippingCard) {
+                    card.innerHTML = `
+                        <div class="bg-gradient-to-r from-[#5a2a1a] to-[#723824] p-4 text-white flex items-center justify-between">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold">${cat.title}</h3>
+                                <p class="text-xs text-[#fcebd2]">Fast & Reliable Delivery Across Tamil Nadu</p>
+                            </div>
+                            ${getSVG(cat.svgType)}
+                        </div>
+                        <div class="p-4 space-y-3">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                                ${cat.rates.map(r => `
+                                    <div class="p-3 bg-[#fff6e9] rounded-xl border border-[#fcebd2] flex justify-between items-center">
+                                        <span class="font-medium text-sm text-[#5a2a1a]">${r.location}</span>
+                                        <span class="font-bold text-[#e8447a]">${r.cost}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <p class="text-xs text-gray-600 bg-amber-50 p-3 rounded-lg border border-amber-200">${cat.notes}</p>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        <div class="bg-gradient-to-r from-[#5a2a1a] to-[#723824] p-4 text-white flex items-center justify-between">
+                            <div>
+                                <h3 class="font-serif text-xl font-bold">${cat.title}</h3>
+                                <p class="text-xs text-[#fcebd2]">Handcrafted with premium ingredients</p>
+                            </div>
+                            ${getSVG(cat.svgType)}
+                        </div>
+                        <div class="p-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-2">
+                                ${cat.items.map(item => `
+                                    <div class="flex items-center justify-between py-2.5 border-b border-dashed border-gray-100 last:border-none">
+                                        <div class="pr-2">
+                                            <div class="flex items-center gap-2">
+                                                <span class="text-sm font-medium text-[#5a2a1a]">${item.name}</span>
+                                                ${item.isNew ? '<span class="bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider">NEW</span>' : ''}
+                                            </div>
+                                            ${item.note ? `<span class="text-[11px] text-gray-500 font-normal">${item.note}</span>` : ''}
+                                        </div>
+                                        <div class="flex items-center gap-3">
+                                            <span class="font-bold text-sm text-[#5a2a1a]">₹${item.price}</span>
+                                            <button onclick="addToCart('${cat.title} - ${item.name}', ${item.price})" class="bg-[#fff6e9] hover:bg-[#e8447a] hover:text-white text-[#e8447a] border border-[#e8447a] w-7 h-7 rounded-full flex items-center justify-center font-bold text-sm transition">
+                                                +
+                                            </button>
+                                        </div>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            ${cat.notes ? `<div class="mt-4 pt-3 border-t border-gray-100 text-xs text-gray-600 italic">Note: ${cat.notes}</div>` : ''}
+                        </div>
+                    `;
+                }
+                container.appendChild(card);
+            });
+        }
+
+        // Filter menu based on search input
+        function filterMenu() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const cards = document.querySelectorAll('#menuContainer > div');
+            
+            cards.forEach(card => {
+                const text = card.innerText.toLowerCase();
+                if (text.includes(query)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Cart Actions
+        function addToCart(itemName, price) {
+            const existing = cart.find(i => i.name === itemName);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({ name: itemName, price: price, qty: 1 });
+            }
+            updateCartUI();
+        }
+
+        function changeQty(index, delta) {
+            cart[index].qty += delta;
+            if (cart[index].qty <= 0) {
+                cart.splice(index, 1);
+            }
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const count = cart.reduce((sum, item) => sum + item.qty, 0);
+            const badge = document.getElementById('cartBadge');
+            badge.innerText = count;
+            badge.classList.toggle('hidden', count === 0);
+
+            const container = document.getElementById('cartItemsContainer');
+            if (cart.length === 0) {
+                container.innerHTML = `<div class="text-center text-gray-500 py-12 text-sm">Your cart is empty.<br>Add some delicious treats!</div>`;
+                document.getElementById('cartTotal').innerText = '₹0';
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = cart.map((item, idx) => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+                return `
+                    <div class="bg-white p-3 rounded-xl border border-[#fcebd2] flex justify-between items-center shadow-sm">
+                        <div>
+                            <div class="text-xs font-semibold text-[#5a2a1a]">${item.name}</div>
+                            <div class="text-xs text-gray-500">₹${item.price} x ${item.qty} = ₹${itemTotal}</div>
+                        </div>
+                        <div class="flex items-center gap-2 bg-[#fff6e9] rounded-lg border border-[#fcebd2] px-2 py-1">
+                            <button onclick="changeQty(${idx}, -1)" class="text-[#5a2a1a] font-bold px-1">-</button>
+                            <span class="text-xs font-bold">${item.qty}</span>
+                            <button onclick="changeQty(${idx}, 1)" class="text-[#e8447a] font-bold px-1">+</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('cartTotal').innerText = `₹${total}`;
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cartModal');
+            modal.classList.toggle('hidden');
+        }
+
+        function sendWhatsAppOrder() {
+            if (cart.length === 0) {
+                alert("Your cart is empty!");
+                return;
+            }
+
+            let msg = "Hello Gugi Creamery! 🧁 I would like to order:\n\n";
+            let total = 0;
+            cart.forEach(item => {
+                const sub = item.price * item.qty;
+                total += sub;
+                msg += `• ${item.name} (x${item.qty}) - ₹${sub}\n`;
+            });
+            msg += `\n*Estimated Total: ₹${total}*\n(Plus applicable shipping charges)\n\nPlease confirm availability and delivery!`;
+
+            const url = `https://wa.me/916383591415?text=${encodeURIComponent(msg)}`;
+            window.open(url, '_blank');
+        }
+
+        // Initialize on load
+        window.onload = renderMenu;
+    </script>
+</body>
+</html>
